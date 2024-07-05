@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puppeteer Screencast</title>
+</head>
+<body>
+  <h1>Puppeteer Screencast</h1>
+  <video id="video" autoplay></video>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const video = document.getElementById('video');
+    const socket = io();
+    
+    socket.on('video', (data) => {
+      const arrayBuffer = new Uint8Array(data);
+      const blob = new Blob([arrayBuffer], { type: 'video/webm' });
+      video.src = URL.createObjectURL(blob);
+    });
+  </script>
+</body>
+</html>
